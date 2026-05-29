@@ -1,0 +1,277 @@
+:root {
+  /* Light mode by default. The brand accent (was violet) is black in light. */
+  --bg: #ffffff;
+  --surface: #f6f5f8;
+  --surface-2: #eeecf2;
+  --border: #dcd9e3;
+  --violet: #0d0b0f;
+  --violet-hover: #2a2533;
+  --violet-soft: rgba(13, 11, 15, 0.07);
+  --text: #16131c;
+  --muted: #6c6678;
+  --radius: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Subtle CRT scanline overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.025) 0px,
+    rgba(0, 0, 0, 0.025) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+}
+
+.page {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 56px 20px 64px;
+}
+
+/* ── Hero ───────────────────────────────────────── */
+.hero {
+  margin-bottom: 44px;
+}
+
+.brand {
+  margin: 0;
+  color: var(--violet);
+  line-height: 0;
+}
+
+.brand-logo {
+  display: block;
+  width: auto;
+  height: 34px;
+}
+
+.tagline {
+  margin: 18px 0 0;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 400;
+}
+
+/* ── Stepper ────────────────────────────────────── */
+.stepper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ── Stepper progress + nav ─────────────────────── */
+.step-progress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.step-count {
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.dot:hover {
+  border-color: var(--violet);
+}
+
+.dot.active {
+  background: var(--violet);
+  border-color: var(--violet);
+  transform: scale(1.15);
+}
+
+.step-nav {
+  display: flex;
+  gap: 10px;
+}
+
+.step-nav .nav-btn {
+  flex: 1;
+  text-align: center;
+}
+
+/* Step transition */
+.step-fade-enter-active,
+.step-fade-leave-active {
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.step-fade-enter-from {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.step-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+/* ── Buttons / links ────────────────────────────── */
+.btn {
+  display: inline-block;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 11px 16px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.05s ease;
+}
+
+.btn:not(:disabled):hover {
+  border-color: var(--violet);
+  background: var(--violet-soft);
+}
+
+.btn:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-weight: 700;
+  color: #fff;
+  background: var(--violet);
+  border-color: var(--violet);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: var(--violet-hover);
+  border-color: var(--violet-hover);
+}
+
+.btn-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-row .btn {
+  flex: 1;
+  min-width: 140px;
+  text-align: center;
+}
+
+/* ── In-app hint (step 3 — action lives inside Mozart) ── */
+.in-app-hint {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  padding: 8px 14px;
+  font-size: 13px;
+  color: var(--violet);
+  background: var(--violet-soft);
+  border: 1px dashed var(--violet);
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.hint-text {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Highlighted glossary terms inside a "why?" body */
+.term {
+  font-style: normal;
+  color: var(--violet);
+}
+
+/* ── Share sub-section (step 4) ─────────────────── */
+.share-label {
+  margin: 16px 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ── Footer ─────────────────────────────────────── */
+.foot {
+  margin-top: 52px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.foot-link {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.foot-link:hover {
+  color: var(--fg);
+  opacity: 1;
+}
+
+/* ── Responsive ─────────────────────────────────── */
+@media (max-width: 420px) {
+  .page {
+    padding: 40px 16px 56px;
+  }
+
+  .brand-logo {
+    height: 28px;
+  }
+}
